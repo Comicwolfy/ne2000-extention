@@ -1,0 +1,16 @@
+
+# ... (existing definitions) ...
+
+# Update the 'run' and 'debug' targets with QEMU networking flags
+run: all
+	qemu-system-i386 -kernel $(KERNEL_BIN) -net nic,model=ne2k_isa -net user # Minimal networking setup
+
+debug: all
+	qemu-system-i386 -s -S -kernel $(KERNEL_BIN) -net nic,model=ne2k_isa -net user # Minimal networking setup
+
+# ... (rest of your Makefile) ...
+
+# In the C_SOURCES variable, add the network extension's path.
+# Assuming you'll clone the network extension repo into a subfolder like `src/extensions/network_ext/`
+# or copy its `.c` file directly into `src/extensions/`.
+C_SOURCES += src/extensions/net_ne2000_extension.c # <-- Add this line
