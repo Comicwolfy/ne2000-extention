@@ -1,10 +1,7 @@
-; In your src/irq_stubs.asm:
+; In the user's src/irq_stubs.asm:
 
-; ... (existing IRQ_COMMON macro and global irq0, irq1) ...
-
+; Find the existing global IRQ declarations (e.g., irq0, irq1) and add:
 global irq3
 irq3:
-    IRQ_COMMON 0x23 ; IRQ3, which maps to 0x23 after PIC remap
-    call net_ne2000_handler_c ; Call the NE2000 C handler
-
-; ... (rest of the ISR definitions) ...
+    IRQ_COMMON 0x23
+    call net_ne2000_handler_c
